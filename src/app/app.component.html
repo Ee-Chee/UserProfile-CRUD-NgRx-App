@@ -1,0 +1,17 @@
+<div>
+    <nav class="navbar navbar-expand navbar-dark" style="background-color: #1afff4">
+        <a href="#" class="navbar-brand">Address Book</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="">List</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="add">Add</a>
+            </li>
+        </ul>    
+    </nav>
+    
+    <div class="container mt-4">
+        <router-outlet></router-outlet>
+    </div>
+</div>

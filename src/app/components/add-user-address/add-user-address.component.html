@@ -1,0 +1,179 @@
+<div class="col-md-6 mx-auto">
+    <div class="card card-container">
+        <form
+            (ngSubmit)="registrationForm.form.valid && onSubmit()"
+            #registrationForm="ngForm"
+            novalidate
+        >
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="firstname"
+                    name="firstname"
+                    [(ngModel)]="registrationFormData.firstname"
+                    required
+                    pattern="[A-zÀ-ž\s-.]+"
+                    maxlength="20"
+                    #firstname="ngModel"
+                />
+                <div class="alert-danger" *ngIf="registrationForm.submitted && firstname.invalid">
+                    <div *ngIf="firstname.errors.required">
+                        First name is required
+                    </div>
+                    <div *ngIf="firstname.errors.maxlength">
+                        First name must be at most 20 characters
+                    </div>
+                    <div *ngIf="firstname.errors.pattern">
+                        Invalid characters
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="lastname"
+                    name="lastname"
+                    [(ngModel)]="registrationFormData.lastname"
+                    required
+                    pattern="[A-zÀ-ž\s-.]+"
+                    maxlength="20"
+                    #lastname="ngModel"
+                />
+                <div class="alert-danger" *ngIf="registrationForm.submitted && lastname.invalid">
+                    <div *ngIf="lastname.errors.required">
+                        Last name is required
+                    </div>
+                    <div *ngIf="lastname.errors.maxlength">
+                        Last name must be at most 20 characters
+                    </div>
+                    <div *ngIf="lastname.errors.pattern">
+                        Invalid characters
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select 
+                    id="gender" 
+                    class="form-control"
+                    required
+                    name="gender"
+                    [(ngModel)]="registrationFormData.gender"
+                    #gender="ngModel"
+                >
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                <div class="alert-danger" *ngIf="registrationForm.submitted && gender.invalid">
+                    <div *ngIf="gender.errors.required">
+                        Gender is required
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthdate">Date of Birth</label>
+                <div id="birthdate" class="input-group">
+                    <input 
+                        class="form-control" 
+                        placeholder="dd.mm.yyyy"
+                        name="dp" 
+                        [(ngModel)]="model"
+                        #birthdate="ngModel" 
+                        ngbDatepicker
+                        required
+                        [minDate]="minDate"
+                        [maxDate]="maxDate"
+                        #d="ngbDatepicker"
+                    />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class='fas fa-calendar-alt'></i></button>
+                    </div>
+                </div>
+                <div class="alert-danger" *ngIf="registrationForm.submitted && birthdate.invalid">
+                    Invalid date
+                </div>
+            </div>
+
+            <div class="form-group container">
+                <label for="address">Address</label>
+                <div class="row" id="address">
+                    <input
+                        type="text"
+                        class="col-8 form-control"
+                        name="street"
+                        [(ngModel)]="address.street"
+                        required
+                        pattern="[A-zÀ-ž\s-.]+"
+                        maxlength="30"
+                        placeholder="street"
+                        #street="ngModel"
+                    />  
+                    <input 
+                        type="number"
+                        class="col-3 ml-auto form-control" 
+                        name="number"
+                        [(ngModel)]="address.number"
+                        required
+                        pattern="[1-9][0-9]*"
+                        placeholder="number"
+                        #number="ngModel" 
+                    />
+                </div>
+                <div class="row">
+                    <div class="col-8 alert-danger" *ngIf="registrationForm.submitted && street.invalid">
+                        <div *ngIf="street.errors.required">
+                            Required
+                        </div>
+                        <div *ngIf="lastname.errors.maxlength">
+                            Max. 30 characters allowed
+                        </div>
+                        <div *ngIf="lastname.errors.pattern">
+                            Invalid characters
+                        </div>
+                    </div>
+                    <div class="col-3 ml-auto alert-danger" *ngIf="registrationForm.submitted && number.invalid">
+                        Invalid
+                    </div>
+                </div>
+                
+                
+
+
+
+
+                <!-- <select 
+                    id="gender" 
+                    class="form-control"
+                    required
+                    name="gender"
+                    [(ngModel)]="registrationFormData.gender"
+                    #gender="ngModel"
+                >
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                <div class="alert-danger" *ngIf="registrationForm.submitted && gender.invalid">
+                    <div *ngIf="gender.errors.required">
+                        Gender is required
+                    </div>
+                </div> -->
+            </div>
+        
+  
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+    
+            <div class="alert alert-warning" *ngIf="registrationForm.submitted && registrationFailed">
+                Registration failed! {{ errorMessage }}
+            </div>
+        </form>
+    </div>
+  </div>
