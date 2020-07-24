@@ -140,24 +140,29 @@
                         name="postcode"  
                         [(ngModel)]="address.postcode" 
                         [ngbTypeahead]="search"
+                        (ngModelChange)="getCities($event, postcode)"
                         required
                         pattern="[0-9]+"
+                        minlength="5"
                         maxlength="5"
                         placeholder="postcode"
                         #postcode="ngModel"
                     />
                     <select 
-                        class="col-6 ml-auto form-control" 
+                        class="col-4 ml-auto form-control" 
                         name="city"
                         [(ngModel)]="address.city"
-                        ng-disabled="disabled"
                         required
-                        placeholder="city"
+                        [disabled]="postcode.invalid"
                         #city="ngModel"
-                    >
+                    >city
+                        <!-- must use ngValue = undefined in order to show placeholder -->
+                        <!-- selected can be without property binding => <option selected hidden> -->
+                        <option [ngValue]="undefined" selected hidden>Select a city</option>
                         <option *ngFor="let city of cities" [value]="city">
                             {{ city }}
                         </option>
+                       
                     </select>
                 </div>
                 <div class="row mx-0">
@@ -166,8 +171,17 @@
                             Required
                         </div>
                         <div *ngIf="postcode.errors.pattern">
-                            Invalid numbers
+                            Invalid number
                         </div>
+                        <div *ngIf="postcode.errors.minlength">
+                            Postcode is a 5 digit number    
+                        </div>
+                        <div *ngIf="postcode.errors.notFound">
+                            {{ postcode.errors.notFound }}
+                        </div>
+                    </div>
+                    <div class="col-4 ml-auto alert-danger" *ngIf="registrationForm.submitted && city.invalid">
+                        Required
                     </div>
                 </div>
                 

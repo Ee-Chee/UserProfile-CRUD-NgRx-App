@@ -39,17 +39,18 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 })
 export class AddUserAddressComponent implements OnInit {
     registrationFormData = <UserAddress>{}; //use type assertions to create empty object for typed variables
-    registrationFailed = false;
-    errorMessage = '';
     model: NgbDateStruct;
     minDate: NgbDateStruct;
     maxDate: NgbDateStruct;
     address = <Address>{};
+    cities: string[];
+    registrationFailed = false;
+    errorMessage = '';
 
     constructor(private ngbCalendar: NgbCalendar) { }
 
     ngOnInit() {
-        console.log(data);
+        // console.log(data);
         this.maxDate = this.ngbCalendar.getToday();
         this.minDate = { year: (this.maxDate.year - 120), month:1, day: 1} //set 120-year range
     }
@@ -70,7 +71,24 @@ export class AddUserAddressComponent implements OnInit {
     //filtering always starts at first position, index 0 of the string.
     //limits to 10 different results, no duplicates
 
+    getCities(e, control) {
+        if(e.length == 5) {
+            this.address.city = undefined; //reset for city validation later
+
+            this.cities = (data as any).default.filter(obj =>
+                obj.zipcode == e
+            ).map(obj => obj.place);
+
+            if(this.cities.length == 0){
+                control.control.setErrors({notFound:"Postcode not found"}); //customize validation
+            }else {
+                control.control.setErrors(null);
+            }
+        }
+    }
+
     onSubmit() {
+        console.log("here", this.address);
         console.log("hey", this.model);
     }
 
