@@ -5,7 +5,7 @@
             #registrationForm="ngForm"
             novalidate
         >
-            <div class="form-group">
+            <div class="form-group container mt-3">
                 <label for="firstname">First Name</label>
                 <input
                     type="text"
@@ -14,7 +14,7 @@
                     name="firstname"
                     [(ngModel)]="registrationFormData.firstname"
                     required
-                    pattern="[A-zÀ-ž\s-.]+"
+                    pattern="[A-zÀ-ž9\s-.]+"
                     maxlength="20"
                     #firstname="ngModel"
                 />
@@ -22,16 +22,13 @@
                     <div *ngIf="firstname.errors.required">
                         First name is required
                     </div>
-                    <div *ngIf="firstname.errors.maxlength">
-                        First name must be at most 20 characters
-                    </div>
                     <div *ngIf="firstname.errors.pattern">
                         Invalid characters
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="lastname">Last Name</label>
                 <input
                     type="text"
@@ -48,16 +45,13 @@
                     <div *ngIf="lastname.errors.required">
                         Last name is required
                     </div>
-                    <div *ngIf="lastname.errors.maxlength">
-                        Last name must be at most 20 characters
-                    </div>
                     <div *ngIf="lastname.errors.pattern">
                         Invalid characters
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="gender">Gender</label>
                 <select 
                     id="gender" 
@@ -77,7 +71,7 @@
                 </div>
             </div>
             
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="birthdate">Date of Birth</label>
                 <div id="birthdate" class="input-group">
                     <input 
@@ -103,7 +97,7 @@
 
             <div class="form-group container">
                 <label for="address">Address</label>
-                <div class="row" id="address">
+                <div class="row mx-0" id="address">
                     <input
                         type="text"
                         class="col-8 form-control"
@@ -126,15 +120,12 @@
                         #number="ngModel" 
                     />
                 </div>
-                <div class="row">
+                <div class="row mx-0">
                     <div class="col-8 alert-danger" *ngIf="registrationForm.submitted && street.invalid">
                         <div *ngIf="street.errors.required">
                             Required
                         </div>
-                        <div *ngIf="lastname.errors.maxlength">
-                            Max. 30 characters allowed
-                        </div>
-                        <div *ngIf="lastname.errors.pattern">
+                        <div *ngIf="street.errors.pattern">
                             Invalid characters
                         </div>
                     </div>
@@ -142,30 +133,45 @@
                         Invalid
                     </div>
                 </div>
-                
-                
-
-
-
-
-                <!-- <select 
-                    id="gender" 
-                    class="form-control"
-                    required
-                    name="gender"
-                    [(ngModel)]="registrationFormData.gender"
-                    #gender="ngModel"
-                >
-                    <option>Male</option>
-                    <option>Female</option>
-                </select>
-                <div class="alert-danger" *ngIf="registrationForm.submitted && gender.invalid">
-                    <div *ngIf="gender.errors.required">
-                        Gender is required
+                <div class="row mt-3 mx-0" id="address">
+                    <input 
+                        type="text" 
+                        class="col-6 form-control" 
+                        name="postcode"  
+                        [(ngModel)]="address.postcode" 
+                        [ngbTypeahead]="search"
+                        required
+                        pattern="[0-9]+"
+                        maxlength="5"
+                        placeholder="postcode"
+                        #postcode="ngModel"
+                    />
+                    <select 
+                        class="col-6 ml-auto form-control" 
+                        name="city"
+                        [(ngModel)]="address.city"
+                        ng-disabled="disabled"
+                        required
+                        placeholder="city"
+                        #city="ngModel"
+                    >
+                        <option *ngFor="let city of cities" [value]="city">
+                            {{ city }}
+                        </option>
+                    </select>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-6 alert-danger" *ngIf="registrationForm.submitted && postcode.invalid">
+                        <div *ngIf="postcode.errors.required">
+                            Required
+                        </div>
+                        <div *ngIf="postcode.errors.pattern">
+                            Invalid numbers
+                        </div>
                     </div>
-                </div> -->
+                </div>
+                
             </div>
-        
   
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>

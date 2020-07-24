@@ -1,6 +1,9 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { NgbCalendar, NgbDateStruct, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
+import * as data from '../../postcodes.de.json';
 import { UserAddress, Address } from '../../interfaces/address-interfaces';
 
 @Injectable()
@@ -46,9 +49,26 @@ export class AddUserAddressComponent implements OnInit {
     constructor(private ngbCalendar: NgbCalendar) { }
 
     ngOnInit() {
+        console.log(data);
         this.maxDate = this.ngbCalendar.getToday();
         this.minDate = { year: (this.maxDate.year - 120), month:1, day: 1} //set 120-year range
     }
+
+    search = (text$: Observable<string>) =>
+    text$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        map(term => term.length < 2 ? [] : (data as any).default.filter(obj => 
+                obj.zipcode.indexOf(term) == 0
+            ).map(obj => obj.zipcode).reduce(
+                (unique, zipcode) => (unique.includes(zipcode) ? unique : [...unique, zipcode]),[])
+            .slice(0, 10)
+        )
+    )
+    //no options shown on empty input/on focus //too many of them
+    //kicks in only if 2+ characters typed
+    //filtering always starts at first position, index 0 of the string.
+    //limits to 10 different results, no duplicates
 
     onSubmit() {
         console.log("hey", this.model);
