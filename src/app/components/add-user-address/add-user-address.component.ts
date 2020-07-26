@@ -1,4 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { AddressBookService } from 'src/app/services/address-book.service';
 import { NgbCalendar, NgbDateStruct, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -44,10 +45,10 @@ export class AddUserAddressComponent implements OnInit {
     maxDate: NgbDateStruct;
     address = <Address>{};
     cities: string[];
-    registrationFailed = false;
-    errorMessage = '';
+    registered: boolean = false;
+    message: string = '';
 
-    constructor(private ngbCalendar: NgbCalendar) { }
+    constructor(private addressBookService: AddressBookService, private ngbCalendar: NgbCalendar) { }
 
     ngOnInit() {
         // console.log(data);
@@ -88,8 +89,14 @@ export class AddUserAddressComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log("here", this.address);
-        console.log("hey", this.model);
+        this.registrationFormData.address = JSON.stringify(this.address);
+        this.registrationFormData.birthday = JSON.stringify(this.model);
+        this.addressBookService.createUserAddress(this.registrationFormData)
+            .subscribe(data => {
+                this.message = data['message'];
+                this.registered = true;
+            })
+
     }
 
 }

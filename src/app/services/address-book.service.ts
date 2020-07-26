@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserAddress } from '../interfaces/address-interfaces';
 
 const baseUrl = 'http://localhost:8082/api/address-book';
 
@@ -11,7 +12,15 @@ export class AddressBookService {
 
     constructor(private http: HttpClient) {}
 
-    getUserAddress(){
-        return this.http.get(`${baseUrl}/user-address`);
+    createUserAddress(data) {
+        return this.http.post(`${baseUrl}/registration`, data);
+    }
+
+    getUserAddresses() {
+        return this.http.get<UserAddress[]>(`${baseUrl}/user-addresses`);
+    }
+
+    search(keyword) {
+        return this.http.get<UserAddress[]>(`${baseUrl}/user-addresses?search=${keyword}`);
     }
 }

@@ -10,7 +10,8 @@ import { AddressBookComponent } from './components/address-book/address-book.com
 import { AddUserAddressComponent } from './components/add-user-address/add-user-address.component';
 import { UserAddressDetailsComponent } from './components/user-address-details/user-address-details.component';
 
-import { ReformatDatePipe } from './pipes/date-reformatting';
+import { TransformAddressPipe } from './pipes/transform-address';
+import { TransformDatePipe } from './pipes/transform-date';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { ReformatDatePipe } from './pipes/date-reformatting';
         AddressBookComponent,
         AddUserAddressComponent,
         UserAddressDetailsComponent,
-        ReformatDatePipe
+        TransformAddressPipe,
+        TransformDatePipe
     ],
     imports: [
         BrowserModule,

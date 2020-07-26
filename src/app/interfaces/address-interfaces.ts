@@ -4,7 +4,7 @@ export interface UserAddress {
     lastname: string;
     gender: string;
     birthday: string;
-    address: Address;
+    address: string;
 }
 
 export interface Address {

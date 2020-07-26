@@ -9,13 +9,23 @@ import { UserAddress } from '../../interfaces/address-interfaces';
 })
 export class AddressBookComponent implements OnInit {
     userAddresses: UserAddress[];
+    searchKeyword: string = '';
+
 
     constructor( private addressBookService: AddressBookService ) {}
 
     ngOnInit() {
-        this.addressBookService.getUserAddress().subscribe(
+        this.addressBookService.getUserAddresses().subscribe(
             data => {
-                console.log("test1", data);
+                this.userAddresses = data;
+            }
+        )
+    }
+
+    search() {
+        this.addressBookService.search(this.searchKeyword).subscribe(
+            data => {
+                this.userAddresses = data;
             }
         )
     }
