@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddressBookComponent } from './components/address-book/address-book.component';
 import { AddUserAddressComponent } from './components/add-user-address/add-user-address.component';
-import { UserAddressDetailsComponent } from './components/user-address-details/user-address-details.component';
 
 import { TransformAddressPipe } from './pipes/transform-address';
 import { TransformDatePipe } from './pipes/transform-date';
@@ -18,7 +17,6 @@ import { TransformDatePipe } from './pipes/transform-date';
         AppComponent,
         AddressBookComponent,
         AddUserAddressComponent,
-        UserAddressDetailsComponent,
         TransformAddressPipe,
         TransformDatePipe
     ],

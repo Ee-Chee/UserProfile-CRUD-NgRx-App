@@ -5,9 +5,10 @@ import { AddressBookComponent } from './components/address-book/address-book.com
 import { AddUserAddressComponent } from './components/add-user-address/add-user-address.component';
 
 const routes: Routes = [
-    { path: '', component: AddressBookComponent},
-    { path: 'add', component: AddUserAddressComponent},
-    { path: '**', redirectTo: ''}
+    { path: '', component: AddressBookComponent },
+    { path: 'add', component: AddUserAddressComponent },
+    { path: 'person/:id', component: AddUserAddressComponent },
+    { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

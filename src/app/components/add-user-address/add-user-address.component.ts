@@ -3,6 +3,7 @@ import { AddressBookService } from 'src/app/services/address-book.service';
 import { NgbCalendar, NgbDateStruct, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 import * as data from '../../postcodes.de.json';
 import { UserAddress, Address } from '../../interfaces/address-interfaces';
@@ -40,20 +41,38 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 })
 export class AddUserAddressComponent implements OnInit {
     registrationFormData = <UserAddress>{}; //use type assertions to create empty object for typed variables
-    model: NgbDateStruct;
+    model = <NgbDateStruct>{};
     minDate: NgbDateStruct;
     maxDate: NgbDateStruct;
     address = <Address>{};
     cities: string[];
     registered: boolean = false;
     message: string = '';
+    toggleSelectPlaceholder: boolean = true;
+    enableUpdate: boolean = false;
 
-    constructor(private addressBookService: AddressBookService, private ngbCalendar: NgbCalendar) { }
+    constructor(private addressBookService: AddressBookService, private ngbCalendar: NgbCalendar, private route: ActivatedRoute) { }
 
     ngOnInit() {
-        // console.log(data);
         this.maxDate = this.ngbCalendar.getToday();
         this.minDate = { year: (this.maxDate.year - 120), month:1, day: 1} //set 120-year range
+        if(this.route.snapshot.paramMap.get('id')) {
+            this.addressBookService.getUserInfo(this.route.snapshot.paramMap.get('id'))
+                .subscribe(data => {
+                    if(data === null || data['errMsg'] === "invalid id"){
+                        window.alert("Invalid user ID!");
+                    } else {
+                        //id is retrived in registrationFormData
+                        this.registrationFormData = data;
+                        this.model = data['birthday'];
+                        this.address = data['address'];
+                        this.toggleSelectPlaceholder = false;
+                        this.enableUpdate = true;
+                    }
+                }
+            )
+       
+        } 
     }
 
     search = (text$: Observable<string>) =>
@@ -91,12 +110,19 @@ export class AddUserAddressComponent implements OnInit {
     onSubmit() {
         this.registrationFormData.address = JSON.stringify(this.address);
         this.registrationFormData.birthday = JSON.stringify(this.model);
-        this.addressBookService.createUserAddress(this.registrationFormData)
-            .subscribe(data => {
-                this.message = data['message'];
-                this.registered = true;
-            })
-
+        if(this.enableUpdate){
+            this.addressBookService.updateUserInfo(this.registrationFormData)
+                .subscribe(data => {
+                    this.message = data['message'];
+                    this.registered = true;
+                })
+        } else {
+            this.addressBookService.createUserAddress(this.registrationFormData)
+                .subscribe(data => {
+                    this.message = data['message'];
+                    this.registered = true;
+                })
+        }
     }
 
 }

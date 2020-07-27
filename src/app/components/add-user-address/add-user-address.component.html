@@ -149,7 +149,7 @@
                         #postcode="ngModel"
                     />
                     <select 
-                        class="col-4 ml-auto form-control" 
+                        class="col-5 ml-auto form-control" 
                         name="city"
                         [(ngModel)]="address.city"
                         required
@@ -158,11 +158,11 @@
                     >city
                         <!-- must use ngValue = undefined in order to show placeholder -->
                         <!-- selected can be without property binding => <option selected hidden> -->
-                        <option [ngValue]="undefined" selected hidden>Select a city</option>
+                        <option *ngIf="toggleSelectPlaceholder" [ngValue]="undefined" selected hidden>Select your city</option>
+                        <option *ngIf="!toggleSelectPlaceholder" [ngValue]="address.city" selected hidden>{{ address.city }}</option>
                         <option *ngFor="let city of cities" [value]="city">
                             {{ city }}
                         </option>
-                       
                     </select>
                 </div>
                 <div class="row mx-0">
@@ -180,7 +180,7 @@
                             {{ postcode.errors.notFound }}
                         </div>
                     </div>
-                    <div class="col-4 ml-auto alert-danger" *ngIf="registrationForm.submitted && city.invalid">
+                    <div class="col-5 ml-auto alert-danger" *ngIf="registrationForm.submitted && city.invalid">
                         Required
                     </div>
                 </div>

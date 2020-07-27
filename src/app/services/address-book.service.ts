@@ -20,6 +20,14 @@ export class AddressBookService {
         return this.http.get<UserAddress[]>(`${baseUrl}/user-addresses`);
     }
 
+    getUserInfo(id) {
+        return this.http.get<any>(`${baseUrl}/${id}`);
+    }
+
+    updateUserInfo(data) {
+        return this.http.post(`${baseUrl}/update-details`, data);
+    }
+
     search(keyword) {
         return this.http.get<UserAddress[]>(`${baseUrl}/user-addresses?search=${keyword}`);
     }

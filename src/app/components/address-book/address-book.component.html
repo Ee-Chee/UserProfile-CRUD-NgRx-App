@@ -28,7 +28,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of userAddresses">
+            <tr *ngFor="let user of userAddresses | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"
+                (click)="navigateDetailedUserPage(user.id)"
+            >
                 <th scope="row">{{ user.id }}</th>
                 <td>{{ user.firstname }} {{ user.lastname }}</td>
                 <td>{{ user.address | transformAddress }}</td>
@@ -36,3 +38,8 @@
         </tbody>
     </table>
 </div>
+<ngb-pagination
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="userAddresses.length">
+</ngb-pagination>
