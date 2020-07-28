@@ -64,6 +64,21 @@ export class AddUserAddressComponent implements OnInit {
                     } else {
                         //id is retrived in registrationFormData
                         this.registrationFormData = data;
+                       
+                        // to get correctly translated value for gender's select input
+                        if(localStorage.getItem('locale') == "en" && this.registrationFormData.gender == "männlich") {
+                            this.registrationFormData.gender = "Male";
+                        }
+                        if(localStorage.getItem('locale') == "en" && this.registrationFormData.gender == "weiblich") {
+                            this.registrationFormData.gender = "Female";
+                        }
+                        if(localStorage.getItem('locale') == "de" && this.registrationFormData.gender == "Male") {
+                            this.registrationFormData.gender = "männlich";
+                        }
+                        if(localStorage.getItem('locale') == "de" && this.registrationFormData.gender == "Female") {
+                            this.registrationFormData.gender = "weiblich";
+                        }
+                        
                         this.model = data['birthday'];
                         this.address = data['address'];
                         this.toggleSelectPlaceholder = false;

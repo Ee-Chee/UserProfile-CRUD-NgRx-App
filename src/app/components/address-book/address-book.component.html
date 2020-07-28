@@ -1,21 +1,21 @@
 <div class="col-md-8">
     <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        name="searchKeyword"
-        [(ngModel)]="searchKeyword"
-        placeholder="Search by name or address"
-      />
-      <div class="input-group-append">
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          (click)="search()"
-        >
-          Search
-        </button>
-      </div>
+        <input
+            type="text"
+            class="form-control"
+            name="searchKeyword"
+            [(ngModel)]="searchKeyword"
+            placeholder="{{ 'search-bar.search-placeholder' | translate }}"
+        />
+        <div class="input-group-append">
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="search()"
+            >
+                {{ 'search-bar.search' | translate }}
+            </button>
+        </div>
     </div>
 </div>
 <div class="table-responsive">
@@ -24,7 +24,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Address</th>
+                <th scope="col">{{ 'table.address' | translate }}</th>
             </tr>
         </thead>
         <tbody>

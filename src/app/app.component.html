@@ -1,12 +1,20 @@
 <div>
     <nav class="navbar navbar-expand navbar-dark" style="background-color: #1afff4">
-        <a href="#" class="navbar-brand">Address Book</a>
+        <a href="#" class="navbar-brand">{{ 'header.name' | translate }}</a>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="">List</a>
+                <a class="nav-link" routerLink="">{{ 'header.list' | translate }}</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="add">Add</a>
+                <a class="nav-link" routerLink="add">{{ 'header.add' | translate }}</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" [hidden]="toggleLanguage">
+                <a class="nav-link switch-hover" (click)="useLanguage('en')">EN</a>
+            </li>
+            <li class="nav-item" [hidden]="!toggleLanguage">
+                <a class="nav-link switch-hover" (click)="useLanguage('de')">DE</a>
             </li>
         </ul>    
     </nav>

@@ -6,7 +6,7 @@
             novalidate
         >
             <div class="form-group container mt-3">
-                <label for="firstname">First Name</label>
+                <label for="firstname">{{ 'form.firstname' | translate }}</label>
                 <input
                     type="text"
                     class="form-control"
@@ -20,16 +20,16 @@
                 />
                 <div class="alert-danger" *ngIf="registrationForm.submitted && firstname.invalid">
                     <div *ngIf="firstname.errors.required">
-                        First name is required
+                        {{ 'form.errors.firstname.required' | translate }}
                     </div>
                     <div *ngIf="firstname.errors.pattern">
-                        Invalid characters
+                        {{ 'form.errors.firstname.pattern' | translate }}
                     </div>
                 </div>
             </div>
 
             <div class="form-group container">
-                <label for="lastname">Last Name</label>
+                <label for="lastname">{{ 'form.lastname' | translate }}</label>
                 <input
                     type="text"
                     class="form-control"
@@ -43,16 +43,16 @@
                 />
                 <div class="alert-danger" *ngIf="registrationForm.submitted && lastname.invalid">
                     <div *ngIf="lastname.errors.required">
-                        Last name is required
+                        {{ 'form.errors.lastname.required' | translate }}
                     </div>
                     <div *ngIf="lastname.errors.pattern">
-                        Invalid characters
+                        {{ 'form.errors.lastname.pattern' | translate }}
                     </div>
                 </div>
             </div>
 
             <div class="form-group container">
-                <label for="gender">Gender</label>
+                <label for="gender">{{ 'form.gender' | translate }}</label>
                 <select 
                     id="gender" 
                     class="form-control"
@@ -61,22 +61,22 @@
                     [(ngModel)]="registrationFormData.gender"
                     #gender="ngModel"
                 >
-                    <option>Male</option>
-                    <option>Female</option>
+                    <option>{{ 'form.gender-options.male' | translate }}</option>
+                    <option>{{ 'form.gender-options.female' | translate }}</option>
                 </select>
                 <div class="alert-danger" *ngIf="registrationForm.submitted && gender.invalid">
                     <div *ngIf="gender.errors.required">
-                        Gender is required
+                        {{ 'form.errors.gender' | translate }}
                     </div>
                 </div>
             </div>
             
             <div class="form-group container">
-                <label for="birthdate">Date of Birth</label>
+                <label for="birthdate">{{ 'form.birthday' | translate }}</label>
                 <div id="birthdate" class="input-group">
                     <input 
                         class="form-control" 
-                        placeholder="dd.mm.yyyy"
+                        placeholder="{{ 'form.birthday-placeholder' | translate }}"
                         name="dp" 
                         [(ngModel)]="model"
                         #birthdate="ngModel" 
@@ -91,12 +91,12 @@
                     </div>
                 </div>
                 <div class="alert-danger" *ngIf="registrationForm.submitted && birthdate.invalid">
-                    Invalid date
+                    {{ 'form.errors.birthday' | translate }}
                 </div>
             </div>
 
             <div class="form-group container">
-                <label for="address">Address</label>
+                <label for="address">{{ 'form.address' | translate }}</label>
                 <div class="row mx-0" id="address">
                     <input
                         type="text"
@@ -106,7 +106,7 @@
                         required
                         pattern="[A-zÀ-ž\s-.]+"
                         maxlength="30"
-                        placeholder="street"
+                        placeholder="{{ 'form.address-placeholder.street' | translate }}"
                         #street="ngModel"
                     />  
                     <input 
@@ -116,21 +116,21 @@
                         [(ngModel)]="address.number"
                         required
                         pattern="[1-9][0-9]*"
-                        placeholder="number"
+                        placeholder="{{ 'form.address-placeholder.number' | translate }}"
                         #number="ngModel" 
                     />
                 </div>
                 <div class="row mx-0">
                     <div class="col-8 alert-danger" *ngIf="registrationForm.submitted && street.invalid">
                         <div *ngIf="street.errors.required">
-                            Required
+                            {{ 'form.errors.address.street.required' | translate }}
                         </div>
                         <div *ngIf="street.errors.pattern">
-                            Invalid characters
+                            {{ 'form.errors.address.street.pattern' | translate }}
                         </div>
                     </div>
                     <div class="col-3 ml-auto alert-danger" *ngIf="registrationForm.submitted && number.invalid">
-                        Invalid
+                        {{ 'form.errors.address.number' | translate }}
                     </div>
                 </div>
                 <div class="row mt-3 mx-0" id="address">
@@ -145,7 +145,7 @@
                         pattern="[0-9]+"
                         minlength="5"
                         maxlength="5"
-                        placeholder="postcode"
+                        placeholder="{{ 'form.address-placeholder.postcode' | translate }}"
                         #postcode="ngModel"
                     />
                     <select 
@@ -155,10 +155,10 @@
                         required
                         [disabled]="postcode.invalid"
                         #city="ngModel"
-                    >city
+                    >
                         <!-- must use ngValue = undefined in order to show placeholder -->
                         <!-- selected can be without property binding => <option selected hidden> -->
-                        <option *ngIf="toggleSelectPlaceholder" [ngValue]="undefined" selected hidden>Select your city</option>
+                        <option *ngIf="toggleSelectPlaceholder" [ngValue]="undefined" selected hidden>{{ 'form.address-placeholder.city' | translate }}</option>
                         <option *ngIf="!toggleSelectPlaceholder" [ngValue]="address.city" selected hidden>{{ address.city }}</option>
                         <option *ngFor="let city of cities" [value]="city">
                             {{ city }}
@@ -168,31 +168,31 @@
                 <div class="row mx-0">
                     <div class="col-6 alert-danger" *ngIf="registrationForm.submitted && postcode.invalid">
                         <div *ngIf="postcode.errors.required">
-                            Required
+                            {{ 'form.errors.address.postcode.required' | translate }}
                         </div>
                         <div *ngIf="postcode.errors.pattern">
-                            Invalid number
+                            {{ 'form.errors.address.postcode.pattern' | translate }}
                         </div>
                         <div *ngIf="postcode.errors.minlength">
-                            Postcode is a 5 digit number    
+                            {{ 'form.errors.address.postcode.length' | translate }}  
                         </div>
-                        <div *ngIf="postcode.errors.notFound">
-                            {{ postcode.errors.notFound }}
+                        <div *ngIf="postcode.errors.notFound" translate [translateParams]="{ en: postcode.errors.notFound, de: 'nicht gefunden' }">
+                            form.errors.address.postcode.value
                         </div>
                     </div>
                     <div class="col-5 ml-auto alert-danger" *ngIf="registrationForm.submitted && city.invalid">
-                        Required
+                        {{ 'form.errors.address.city' | translate }}
                     </div>
                 </div>
                 
             </div>
   
             <div class="form-group">
-                <button type="submit" [disabled]="registered" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" [disabled]="registered" class="btn btn-primary btn-block">{{ 'form.submit' | translate }}</button>
             </div>
     
-            <div class="alert alert-info" *ngIf="registrationForm.submitted && registered">
-                {{ message }}
+            <div class="alert alert-info" *ngIf="registrationForm.submitted && registered" translate [translateParams]="{ en: message, de: 'erfolgreich versendet!' }">
+                form.submit-message
             </div>
         </form>
     </div>

@@ -1,0 +1,63 @@
+{
+    "header": {
+        "name": "Address Book",
+        "list": "List",
+        "add": "Add"
+    },
+
+    "table": {
+        "address": "Address"
+    },
+    
+    "search-bar": {
+        "search": "Search",
+        "search-placeholder": "Search by name or address"
+    },
+    
+    "form": {
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "gender": "Gender",
+        "gender-options": {
+            "male": "Male",
+            "female": "Female"
+        },
+        "birthday": "Date of Birth",
+        "birthday-placeholder": "dd.mm.yyyy",
+        "address": "Address",
+        "address-placeholder": {
+            "street": "street",
+            "number": "number",
+            "postcode": "postcode",
+            "city": "Select your city"
+        },
+        "errors": {
+            "firstname": {
+                "required": "First name is required",
+                "pattern": "Invalid characters"
+            },
+            "lastname": {
+                "required": "Last name is required",
+                "pattern": "Invalid characters"
+            },
+            "gender": "Gender is required",
+            "birthday": "Invalid date",
+            "address": {
+                "street": {
+                    "required": "Required",
+                    "pattern": "Invalid characters"
+                },
+                "number": "Invalid",
+                "postcode": {
+                    "required": "Required",
+                    "pattern": "Invalid number",
+                    "length": "Postcode is a 5 digit number",
+                    "value": "{{en}}"
+                },
+                "city": "Required"
+            }
+        },
+        "submit": "submit",
+        "submit-message": "{{en}}"
+    }
+}

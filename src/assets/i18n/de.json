@@ -1,0 +1,63 @@
+{
+    "header": {
+        "name": "Adressverwaltung",
+        "list": "Liste",
+        "add": "Hinzufügen"
+    },
+
+    "table": {
+        "address": "Anschrift"
+    },
+    
+    "search-bar": {
+        "search": "Suchen",
+        "search-placeholder": "Zur Suche Name oder Anschrift hier eingeben"
+    },
+
+    "form": {
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "gender": "Geschlecht",
+        "gender-options": {
+            "male": "männlich",
+            "female": "weiblich"
+        },
+        "birthday": "Geburtsdatum",
+        "birthday-placeholder": "DD.MM.JJJJ",
+        "address": "Anschrift",
+        "address-placeholder": {
+            "street": "Straße",
+            "number": "Hausnummer",
+            "postcode": "Postleitzahl",
+            "city": "Wählen Sie Ihre Stadt"
+        },
+        "errors": {
+            "firstname": {
+                "required": "Pflichtfeld",
+                "pattern": "ungültige Eingabe"
+            },
+            "lastname": {
+                "required": "Pflichtfeld",
+                "pattern": "ungültige Eingabe"
+            },
+            "gender": "Pflichtfeld",
+            "birthday": "ungültige Eingabe",
+            "address": {
+                "street": {
+                    "required": "Pflichtfeld",
+                    "pattern": "ungültige Eingabe"
+                },
+                "number": "ungültig",
+                "postcode": {
+                    "required": "Pflichtfeld",
+                    "pattern": "ungültige Eingabe",
+                    "length": "5 Ziffern",
+                    "value": "{{de}}"
+                },
+                "city": "Pflichtfeld"
+            }
+        },
+        "submit": "absenden",
+        "submit-message": "{{de}}"
+    }
+}

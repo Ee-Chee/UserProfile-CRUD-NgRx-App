@@ -5,3 +5,8 @@ nav .navbar-nav li a {
 .active {
     background-color: rgb(192, 226, 43);
 }
+
+.switch-hover:hover {
+    background-color: rgb(192, 226, 43);
+    cursor: pointer;
+}
