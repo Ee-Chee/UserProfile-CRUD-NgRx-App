@@ -100,7 +100,7 @@
                 <div class="row mx-0" id="address">
                     <input
                         type="text"
-                        class="col-8 form-control"
+                        class="col-sm-8 mb-sm-3 form-control"
                         name="street"
                         [(ngModel)]="address.street"
                         required
@@ -108,20 +108,8 @@
                         maxlength="30"
                         placeholder="{{ 'form.address-placeholder.street' | translate }}"
                         #street="ngModel"
-                    />  
-                    <input 
-                        type="number"
-                        class="col-3 ml-auto form-control" 
-                        name="number"
-                        [(ngModel)]="address.number"
-                        required
-                        pattern="[1-9][0-9]*"
-                        placeholder="{{ 'form.address-placeholder.number' | translate }}"
-                        #number="ngModel" 
                     />
-                </div>
-                <div class="row mx-0">
-                    <div class="col-8 alert-danger" *ngIf="registrationForm.submitted && street.invalid">
+                    <div class="col-sm-3 mb-sm-3 alert-danger" *ngIf="registrationForm.submitted && street.invalid">
                         <div *ngIf="street.errors.required">
                             {{ 'form.errors.address.street.required' | translate }}
                         </div>
@@ -129,14 +117,25 @@
                             {{ 'form.errors.address.street.pattern' | translate }}
                         </div>
                     </div>
-                    <div class="col-3 ml-auto alert-danger" *ngIf="registrationForm.submitted && number.invalid">
+                    <input 
+                        type="number"
+                        class="col-sm-8 form-control" 
+                        name="number"
+                        [(ngModel)]="address.number"
+                        required
+                        pattern="[1-9][0-9]*"
+                        placeholder="{{ 'form.address-placeholder.number' | translate }}"
+                        #number="ngModel" 
+                    />
+                    <div class="col-sm-3 alert-danger" *ngIf="registrationForm.submitted && number.invalid">
                         {{ 'form.errors.address.number' | translate }}
                     </div>
                 </div>
+                
                 <div class="row mt-3 mx-0" id="address">
                     <input 
                         type="text" 
-                        class="col-6 form-control" 
+                        class="col-sm-8 mb-sm-3 form-control" 
                         name="postcode"  
                         [(ngModel)]="address.postcode" 
                         [ngbTypeahead]="search"
@@ -148,8 +147,22 @@
                         placeholder="{{ 'form.address-placeholder.postcode' | translate }}"
                         #postcode="ngModel"
                     />
+                    <div class="col-sm-3 mb-sm-3 alert-danger" *ngIf="registrationForm.submitted && postcode.invalid">
+                        <div *ngIf="postcode.errors.required">
+                            {{ 'form.errors.address.postcode.required' | translate }}
+                        </div>
+                        <div *ngIf="postcode.errors.pattern">
+                            {{ 'form.errors.address.postcode.pattern' | translate }}
+                        </div>
+                        <div *ngIf="postcode.errors.minlength">
+                            {{ 'form.errors.address.postcode.length' | translate }}  
+                        </div>
+                        <div *ngIf="postcode.errors.notFound" translate [translateParams]="{ en: postcode.errors.notFound, de: 'nicht gefunden' }">
+                            form.errors.address.postcode.value
+                        </div>
+                    </div>
                     <select 
-                        class="col-5 ml-auto form-control" 
+                        class="col-sm-8 form-control" 
                         name="city"
                         [(ngModel)]="address.city"
                         required
@@ -164,27 +177,10 @@
                             {{ city }}
                         </option>
                     </select>
-                </div>
-                <div class="row mx-0">
-                    <div class="col-6 alert-danger" *ngIf="registrationForm.submitted && postcode.invalid">
-                        <div *ngIf="postcode.errors.required">
-                            {{ 'form.errors.address.postcode.required' | translate }}
-                        </div>
-                        <div *ngIf="postcode.errors.pattern">
-                            {{ 'form.errors.address.postcode.pattern' | translate }}
-                        </div>
-                        <div *ngIf="postcode.errors.minlength">
-                            {{ 'form.errors.address.postcode.length' | translate }}  
-                        </div>
-                        <div *ngIf="postcode.errors.notFound" translate [translateParams]="{ en: postcode.errors.notFound, de: 'nicht gefunden' }">
-                            form.errors.address.postcode.value
-                        </div>
-                    </div>
-                    <div class="col-5 ml-auto alert-danger" *ngIf="registrationForm.submitted && city.invalid">
+                    <div class="col-sm-3 alert-danger" *ngIf="registrationForm.submitted && city.invalid">
                         {{ 'form.errors.address.city' | translate }}
                     </div>
                 </div>
-                
             </div>
   
             <div class="form-group">

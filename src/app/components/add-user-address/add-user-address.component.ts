@@ -64,7 +64,7 @@ export class AddUserAddressComponent implements OnInit {
                     } else {
                         //id is retrived in registrationFormData
                         this.registrationFormData = data;
-                       
+                        
                         // to get correctly translated value for gender's select input
                         if(localStorage.getItem('locale') == "en" && this.registrationFormData.gender == "männlich") {
                             this.registrationFormData.gender = "Male";
