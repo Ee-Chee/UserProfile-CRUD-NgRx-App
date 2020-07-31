@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { AddressBookService } from 'src/app/services/address-book.service';
-import { UserAddress } from '../../interfaces/address-interfaces';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { AddressBookService } from 'src/app/services/address-book.service';
+import { UserAddress } from '../../interfaces/address-interfaces';
+import { AddressBookStoreState, AddressBookStoreSelectors } from '../../root-store';
 
 @Component({
-  selector: 'app-address-book',
-  templateUrl: './address-book.component.html',
-  styleUrls: ['./address-book.component.css']
+    selector: 'app-address-book',
+    templateUrl: './address-book.component.html',
+    styleUrls: ['./address-book.component.css']
 })
+
 export class AddressBookComponent implements OnInit {
-    userAddresses: UserAddress[] = [];
+    userAddresses$: Observable<UserAddress[]>;
+
+    userAddresses: UserAddress[];
     searchKeyword: string = '';
     page = 1;
     pageSize = 5;
 
-    constructor( private addressBookService: AddressBookService, private router: Router ) {}
+    constructor( private addressBookService: AddressBookService, private router: Router, private store$: Store<AddressBookStoreState.State> ) {}
 
     ngOnInit() {
-        this.addressBookService.getUserAddresses().subscribe(
-            data => {
-                this.userAddresses = data;
-                this.userAddresses.sort(function(a:UserAddress, b:UserAddress) {
-                    return a.id - b.id;
-                })//sort according ID
-            }
-        )
+        this.userAddresses$ = this.store$.select(
+            AddressBookStoreSelectors.selectAllUserAddresses
+        );
     }
 
     search() {
@@ -34,7 +35,8 @@ export class AddressBookComponent implements OnInit {
                 this.userAddresses = data;
                 this.userAddresses.sort(function(a:UserAddress, b:UserAddress) {
                     return a.id - b.id;
-                })
+                });
+                this.userAddresses$ = of(this.userAddresses);
             }
         )
     }

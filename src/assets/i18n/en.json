@@ -5,6 +5,11 @@
         "add": "Add"
     },
 
+    "body": {
+        "error": "Error retrieving data!",
+        "load": "Loading data..."
+    },
+
     "table": {
         "address": "Address"
     },

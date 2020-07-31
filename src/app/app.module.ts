@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
+import { RootStoreModule } from './root-store';
 
 import { AppComponent } from './app.component';
 import { AddressBookComponent } from './components/address-book/address-book.component';
@@ -25,6 +26,7 @@ import { TransformDatePipe } from './pipes/transform-date';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        RootStoreModule,
         FormsModule,
         HttpClientModule,
         NgbModule,

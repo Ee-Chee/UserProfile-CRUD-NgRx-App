@@ -5,6 +5,11 @@
         "add": "Hinzufügen"
     },
 
+    "body": {
+        "error": "Datenfehler!",
+        "load": " Laden von Daten..."
+    },
+
     "table": {
         "address": "Anschrift"
     },

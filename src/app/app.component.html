@@ -20,5 +20,11 @@
     
 <div class="container mt-4">
     <router-outlet></router-outlet>
+    <div *ngIf="error$ | async">
+        {{ 'body.error' | translate }}
+    </div>
+    <div *ngIf="isLoading$ | async">
+        {{ 'body.load' | translate }}
+    </div>
 </div>
 
